@@ -1,10 +1,10 @@
 package config
 
 type ServerType struct {
-	Port string
+	Port        string
+	MaxBodySize string
 }
 
 type FilesType struct {
-	AvatarPath  string
-	MaxFileSize int
+	AvatarPath string
 }

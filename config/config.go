@@ -2,7 +2,6 @@ package config
 
 import (
 	"os"
-	"strconv"
 )
 
 type Config struct {
@@ -14,18 +13,13 @@ var config Config
 
 func Instantiate() (err error) {
 
-	filesMaxSize, err := strconv.Atoi(os.Getenv("FILES_MAX_SIZE"))
-	if err != nil {
-		return
-	}
-
 	config = Config{
 		Server: ServerType{
-			Port: os.Getenv("SERVER_PORT"),
+			Port:        os.Getenv("SERVER_PORT"),
+			MaxBodySize: os.Getenv("FILES_MAX_SIZE"),
 		},
 		Files: FilesType{
-			AvatarPath:  os.Getenv("FILES_AVATARS_FOLDER"),
-			MaxFileSize: filesMaxSize,
+			AvatarPath: os.Getenv("FILES_AVATARS_FOLDER"),
 		},
 	}
 

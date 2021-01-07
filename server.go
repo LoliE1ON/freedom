@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"os"
 
 	"github.com/joho/godotenv"
 
@@ -24,6 +25,14 @@ func main() {
 	/** Make config **/
 	if err := config.Instantiate(); err != nil {
 		log.Fatal("Error parsing config", err)
+	}
+
+	/** Create folder for avatars **/
+	var avatarDirectory = config.GetConfig().Files.AvatarPath
+	if _, err := os.Stat(avatarDirectory); os.IsNotExist(err) {
+		if err := os.MkdirAll(avatarDirectory, os.ModePerm); err != nil {
+			log.Fatal("Failed to create avatars folder", err)
+		}
 	}
 
 	/** Setup routes **/
