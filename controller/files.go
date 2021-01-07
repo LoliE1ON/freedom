@@ -2,9 +2,9 @@ package controller
 
 import (
 	"net/http"
+	"os"
 
 	"github.com/LoliE1ON/freedom/config"
-
 	"github.com/LoliE1ON/freedom/utils"
 
 	"github.com/google/uuid"
@@ -13,15 +13,27 @@ import (
 )
 
 func FilesDownloadAvatar(c echo.Context) error {
-	return c.String(http.StatusOK, "Hello, World!!")
+
+	/** Validate **/
+	var requestParam = c.Param("id")
+	if _, err := uuid.Parse(requestParam); err != nil {
+		return c.NoContent(http.StatusBadRequest)
+	}
+
+	/** Check for file existing **/
+	var avatarPath = config.GetConfig().Files.AvatarPath + "/" + requestParam + ".avatar"
+	if _, err := os.Stat(avatarPath); os.IsNotExist(err) {
+		return c.NoContent(http.StatusNotFound)
+	}
+
+	return c.File(avatarPath)
 }
 
 func FilesUploadAvatar(c echo.Context) error {
 
 	/** Validate fields **/
-	id := c.FormValue("id")
 	file, err := c.FormFile("file")
-	if len(id) == 0 || err != nil {
+	if err != nil {
 		return c.NoContent(http.StatusBadRequest)
 	}
 
