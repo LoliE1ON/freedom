@@ -1,17 +1,17 @@
-package routesApi
+package routes
 
 import (
 	"github.com/LoliE1ON/freedom/controller"
 	"github.com/labstack/echo/v4"
 )
 
-func SetRoutes(e *echo.Echo) {
+func SetApiRoutes(e *echo.Echo) {
 
-	e.GET("/", controller.HomeIndex)
+	var api = e.Group("/api")
 
-	files := e.Group("/files")
+	var files = api.Group("/files")
 	{
-		files.GET("/get/:id", controller.FilesDownload)
+		files.GET("/download/:id", controller.FilesDownload)
 		files.POST("/upload", controller.FilesUpload)
 	}
 

@@ -1,0 +1,3 @@
+### Download file
+GET {{baseUrl}}/api/files/download/11111111
+Accept: application/json

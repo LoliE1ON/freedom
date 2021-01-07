@@ -10,7 +10,8 @@ var e = echo.New()
 
 func main() {
 
-	routesApi.SetRoutes(e)
+	routes.SetApiRoutes(e)
+	routes.SetWebRoutes(e)
 
 	var port = config.ServerGetPortForListener()
 	e.Logger.Fatal(e.Start(port))
