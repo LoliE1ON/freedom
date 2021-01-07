@@ -12,6 +12,6 @@ func main() {
 
 	routesApi.SetRoutes(e)
 
-	var port = configServer.GetPortForListener()
+	var port = config.ServerGetPortForListener()
 	e.Logger.Fatal(e.Start(port))
 }

@@ -1,14 +1,18 @@
 package routesApi
 
 import (
+	"github.com/LoliE1ON/freedom/controller"
 	"github.com/labstack/echo/v4"
-	"net/http"
 )
 
 func SetRoutes(e *echo.Echo) {
 
-	e.GET("/", func(c echo.Context) error {
-		return c.String(http.StatusOK, "Hello, World!")
-	})
+	e.GET("/", controller.HomeIndex)
+
+	files := e.Group("/files")
+	{
+		files.GET("/get/:id", controller.FilesDownload)
+		files.POST("/upload", controller.FilesUpload)
+	}
 
 }
