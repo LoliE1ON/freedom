@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 
 	"github.com/joho/godotenv"
 
@@ -20,11 +21,16 @@ func main() {
 		e.Logger.Fatal("Failed to parse ENV file", err)
 	}
 
+	/** Make config **/
+	if err := config.Instantiate(); err != nil {
+		log.Fatal("Error parsing config", err)
+	}
+
 	/** Setup routes **/
 	routes.SetApiRoutes(e)
 	routes.SetWebRoutes(e)
 
 	/** Start server **/
-	e.Logger.Fatal(e.Start(fmt.Sprintf(":%s", config.GetServer().Port)))
+	e.Logger.Fatal(e.Start(fmt.Sprintf(":%s", config.GetConfig().Server.Port)))
 
 }
