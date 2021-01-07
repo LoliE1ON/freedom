@@ -1,17 +1,17 @@
 package main
 
 import (
-	"net/http"
-
+	"github.com/LoliE1ON/freedom/config"
+	"github.com/LoliE1ON/freedom/routes"
 	"github.com/labstack/echo/v4"
 )
 
+var e = echo.New()
+
 func main() {
 
-	e := echo.New()
-	e.GET("/", func(c echo.Context) error {
-		return c.String(http.StatusOK, "Hello, World!")
-	})
+	routesApi.SetRoutes(e)
 
-	e.Logger.Fatal(e.Start(":1323"))
+	var port = configServer.GetPortForListener()
+	e.Logger.Fatal(e.Start(port))
 }
