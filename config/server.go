@@ -1,14 +1,13 @@
 package config
 
 import (
+	"os"
+
 	"github.com/LoliE1ON/freedom/types"
-	"strconv"
 )
 
-var Server = types.Server{
-	Port: 8080,
-}
-
-func ServerGetPortForListener() string {
-	return ":" + strconv.Itoa(Server.Port)
+func GetServer() types.ServerConfig {
+	return types.ServerConfig{
+		Port: os.Getenv("SERVER_PORT"),
+	}
 }
