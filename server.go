@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"os"
 
 	"github.com/joho/godotenv"
 
@@ -20,8 +19,6 @@ func main() {
 	if err := godotenv.Load(".env"); err != nil {
 		e.Logger.Fatal("Failed to parse ENV file", err)
 	}
-
-	println(os.Getenv("SERVER_PORT"))
 
 	/** Setup routes **/
 	routes.SetApiRoutes(e)
