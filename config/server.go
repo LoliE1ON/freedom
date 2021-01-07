@@ -5,7 +5,7 @@ import (
 	"strconv"
 )
 
-var Server = types.ServerType{
+var Server = typesServer.Server{
 	Port: 8080,
 }
 

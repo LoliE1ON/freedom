@@ -1,5 +1,5 @@
-package types
+package typesServer
 
-type ServerType struct {
+type Server struct {
 	Port int
 }
