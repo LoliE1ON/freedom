@@ -1,4 +1,4 @@
-package freedom
+package main
 
 import (
 	"net/http"
